@@ -1,11 +1,11 @@
 {
   "name": "artizan",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Tiny CSS in JS library focusing on CSS custom properties for theming",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "esbuild src/*.ts --outdir=dist"
+    "build": "tsc && esbuild src/*.ts --outdir=lib --sourcemap"
   },
   "author": "",
   "license": "ISC",
