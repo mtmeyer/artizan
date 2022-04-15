@@ -2,7 +2,7 @@
   "compilerOptions": {
     "emitDeclarationOnly": true,
     "declaration": true,
-    "outDir": "lib",
+    "outFile": "lib/types.ts",
     "esModuleInterop": true,
     "lib": ["es2015", "es2016", "dom", "es2018.promise"]
   }
