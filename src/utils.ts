@@ -1,7 +1,8 @@
 import { Result } from "postcss";
 
+// Either gets existing style tag or mocks for server side
 export const setStyleSheet = () => {
-  if (!window) {
+  if (typeof window === "undefined") {
     let cssRules: string[] = [];
     return {
       cssRules,
@@ -16,6 +17,7 @@ export const setStyleSheet = () => {
   }
 };
 
+// Takes output from postCSS and rebuilds it into a valid string
 export const rebuildCssString = (inputCss: Result) => {
   return inputCss.root.nodes.map((node) => {
     let css = ``;
