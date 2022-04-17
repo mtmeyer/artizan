@@ -74,7 +74,7 @@ jobs:
         uses: bahmutov/npm-install@v1
 
       - name: 🔎 Type check
-        run: npm run tsc
+        run: tsc
 
   release:
     name: 🚀 Release
