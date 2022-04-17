@@ -6,6 +6,7 @@
   "module": "lib/esm/index.js",
   "types": "lib/@types/types.d.ts",
   "scripts": {
+    "test": "echo Test",
     "build": "tsc && npm run build:esm && npm run build:cjs",
     "build:base": "esbuild src/*.ts --sourcemap --minify",
     "build:esm": "npm run build:base -- --format=esm --outdir=lib/esm",

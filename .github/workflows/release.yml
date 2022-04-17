@@ -10,20 +10,23 @@ jobs:
     name: 🔎 Check version
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Get package version
+
+      - name: 📦 Get package version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@master
-      - name: Log package version
+
+      - name: 💻 Log package version
         run: echo ${{ steps.package-version.outputs.current-version }}
-      - name: Get previous release version
+
+      - name: 🎣 Get previous release version
         id: previous-release-version
         uses: WyriHaximus/github-action-get-previous-tag@v1
-      - name: Log previous release tag
-        run: echo ${{ steps.previous-release-version.outpus.tag }}
-      - name: Check if version has been bumped
+
+      - name: 🔎 Check if version has been bumped
         id: check-version-bump
         if: ${{ steps.package-version.outputs.current-version }} == ${{ steps.previous-release-version.outpus.tag }}
         uses: actions/github-script@v3
@@ -31,23 +34,69 @@ jobs:
           script: |
             core.setFailed('You need to bump the version in package.json')
 
+  test:
+    name: ⚡ Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: 📥 Download deps
+        uses: bahmutov/npm-install@v1
+
+      - name: ⚡ Run test
+        run: npm run test
+
+  typecheck:
+    name: ʦ TypeScript
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: 📥 Download deps
+        uses: bahmutov/npm-install@v1
+
+      - name: 🔎 Type check
+        run: npm run tsc
+
   release:
     name: 🚀 Release
-    needs: [version]
+    needs: [version, typecheck, test]
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v2
-      - name: Get package version
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v2
+
+      - name: 📦 Get package version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@master
-      - name: Create tag
+
+      - name: 🏷️ Create tag
         uses: rickstaa/action-create-tag@v1
         with:
           tag: ${{ steps.package-version.outputs.current-version }}
           message: "Latest release"
-      - name: Create release
+
+      - name: 🖌️ Create release
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ steps.package-version.outputs.current-version }}
