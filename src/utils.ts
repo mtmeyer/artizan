@@ -24,7 +24,6 @@ export const rebuildCssString = (inputCss: Result) => {
     node.nodes.forEach((element) => {
       css = `${css} \n ${element.prop}: ${element.value};`;
     });
-
     return `${node.selector} { ${css} \n }`;
   });
 };
