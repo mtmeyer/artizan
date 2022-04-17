@@ -1,9 +1,11 @@
 {
+  "include": ["src/*.ts"],
   "compilerOptions": {
     "emitDeclarationOnly": true,
     "declaration": true,
-    "outFile": "lib/types.ts",
+    "outFile": "lib/@types/types.ts",
     "esModuleInterop": true,
+    "moduleResolution": "node",
     "lib": ["es2015", "es2016", "dom", "es2018.promise"]
   }
 }

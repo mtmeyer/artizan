@@ -28,3 +28,7 @@ export const rebuildCssString = (inputCss: Result) => {
     return `${node.selector} { ${css} \n }`;
   });
 };
+
+export const removeEmptyLines = (string: string) => {
+  return string.replace(/^\s*\n/gm, "");
+};
