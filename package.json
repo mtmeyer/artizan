@@ -6,7 +6,7 @@
   "module": "lib/esm/index.js",
   "types": "lib/@types/types.d.ts",
   "scripts": {
-    "test": "echo Test",
+    "test": "vitest",
     "build": "tsc && npm run build:esm && npm run build:cjs",
     "build:base": "esbuild src/*.ts --sourcemap --minify",
     "build:esm": "npm run build:base -- --format=esm --outdir=lib/esm",
@@ -21,7 +21,8 @@
   },
   "devDependencies": {
     "esbuild": "^0.14.36",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.3",
+    "vitest": "^0.9.3"
   },
   "repository": {
     "url": "https://github.com/mtmeyer/artizan"
