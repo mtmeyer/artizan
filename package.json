@@ -1,6 +1,6 @@
 {
   "name": "artizan",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "Tiny CSS in JS library focusing on CSS custom properties for theming",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
