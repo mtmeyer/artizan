@@ -1,6 +1,13 @@
-name: "🚀 Publish"
+# name: "🚀 Publish"
 
-on:
-  push:
-    branches:
-      - release
+# on:
+#   push:
+#     branches:
+#       - release
+
+# jobs:
+#   release:
+#     name: 🚀 Publish
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name:
