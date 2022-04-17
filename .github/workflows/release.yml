@@ -27,9 +27,15 @@ jobs:
         uses: WyriHaximus/github-action-get-previous-tag@v1
 
       - name: 🔎 Check if version has been bumped
-        id: check-version-bump
-        if: ${{ steps.package-version.outputs.current-version }} == ${{ steps.previous-release-version.outpus.tag }}
+        uses: Thog/action-equals@v1
+        id: isVersionBumped
+        with:
+          a: ${{ steps.package-version.outputs.current-version }}
+          b: ${{ steps.previous-release-version.outpus.tag }}
+
+      - name: 🛑 Exit if version isn't bumped
         uses: actions/github-script@v3
+        if: steps.isVersionBumped.outputs.result
         with:
           script: |
             core.setFailed('You need to bump the version in package.json')
