@@ -1,0 +1,6 @@
+name: "🚀 Publish"
+
+on:
+  push:
+    branches:
+      - release
